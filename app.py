@@ -1,3 +1,5 @@
+import datetime
+import math
 # Create a function that takes a list of numbers lst, a string s and return a list of numbers as per the following rules:
 
 # "Asc" returns a sorted list in ascending order.
@@ -29,7 +31,7 @@ def is_curzon(num):
     return True if first % second == 0 else False
 
 # Create a function that returns a list of strings sorted by length in ascending order.
-def sort_by_length(lst):
+def sort_by_length1(lst):
     asc_list = sorted(lst, key=len)
     return asc_list
 
@@ -97,3 +99,160 @@ def count_ones(num):
     nums = [int(i) for i in str(bin(num)[2:])]
     return nums.count(1)
 
+#You need to create two functions to substitute str() and int(). A function called int_to_str() that converts integers into strings and a 
+# function called str_to_int() that converts strings into integers.
+def int_to_str(num):
+    num1 = f"'{num}'"
+    print(num1)
+    return num1
+	
+
+def str_to_int(num):
+    num = num[1:-1]
+    return num
+
+#Write a function that stutters a word as if someone is struggling to read it. The first two letters are repeated twice with an 
+# ellipsis ... and space after each, and then the word is pronounced with a question mark ?.
+def stutter(word):
+    two = word[:2]
+    stutter = f'{two}... {two}... {word}?'
+    return stutter
+    print(stutter)
+
+# The vertical bar | is the equivalent to "or" in RegEx. The regular expression x|y matches either "x" or "y". Write the regular expression 
+# that will match all red flag and blue flag in a string. You must use | in your expression. Flags can come in any order.
+import re
+
+txt1 = "red flag blue flag"
+txt2 = "yellow flag red flag blue flag green flag"
+txt3 = "pink flag red flag black flag blue flag green flag red flag"
+pattern = "red flag|blue flag"
+
+# print(re.findall(pattern, txt3))
+
+#Create a function that takes a list of non-negative integers and strings and return a new list without the strings.
+def filter_list(lst):
+    int_lst = []
+    for value in lst:
+        if isinstance(value, int) == True:
+            int_lst.append(value)
+    return int_lst
+
+# Create a function that takes a string and returns the number (count) of vowels contained within it.
+def count_vowels(txt):
+    vowels = 'aeiouAEIOU'
+    return sum(letter in vowels for letter in txt)
+
+# Christmas Eve is almost upon us, so naturally we need to prepare some milk and cookies for Santa! Create a function that accepts
+#  a Date object and returns True if it's Christmas Eve (December 24th) and False otherwise
+def time_for_milk_and_cookies(date):
+    if date.strftime('%m') == '12' and date.strftime('%d') == '24':
+        return True
+    else:
+        return False
+
+# Create a function that returns the number of arguments it was called with.
+def num_args(*args):
+    return(len(args))
+
+# Write a function that searches a list of names (unsorted) for the name "Bob" and returns the location in the list. If Bob is not in the list, return -1.
+def find_bob(names):
+    while names:
+        try:
+            x = names.index('Bob')
+            return x
+        except ValueError:
+            return -1      
+
+# Create a function to convert a list of percentages to their decimal equivalents.
+def convert_to_decimal(perc):
+    perc = [p.strip() and p.replace('%', '') for p in perc]
+    perc = [float(p) for p in perc]
+    perc = [p/100 for p in perc]
+    print(perc)
+    return perc
+
+# convert_to_decimal(["1%", "2%", "3%"])
+# convert_to_decimal(["33%", "98.1%", "56.44%", "100%"])
+
+# Create a function that reverses a boolean value and returns the string "boolean expected" if another variable type is given.
+def reverse(arg):
+    if type(arg) == bool:
+        if arg == False:
+            print(True)
+            return True
+        elif arg == True:
+            print(False)
+            return False
+    else:
+        print('boolean expected')
+        return 'boolean expected'
+
+# Write a function that finds the sum of the first n natural numbers. Make your function recursive.
+def sum_numbers(n):
+    if n <= 1:
+        return n
+    else:
+        return n + sum_numbers(n-1)
+        
+# Given a list of numbers and a value n, write a function that returns the probability of choosing a number 
+# greater than or equal to n from the list. The probability should be expressed as a percentage, rounded to one decimal place.
+def probability(lst, n):
+    amount = []
+    for num in lst:
+        if num >= n:
+            amount.append(num)
+    prob = round(100 * (len(amount)/len(lst)), 1)
+    return prob
+
+# probability([1, 4, 18, 19, 15, 3, 3, 11], 23)
+
+# Create a function that returns True if a given inequality expression is correct and False otherwise.
+def correct_signs(txt):
+    return eval(txt)
+
+# Write a function that takes a list of elements and returns only the integers.
+def return_only_integer(lst):
+    ints = [value for value in lst if type(value) == int]
+    return ints
+
+# Programmer Pete is trying to turn two lists inside one list into one without messing the order of the list nor the type and 
+# because he's pretty advanced he made it without blinking but I want you to make it too.
+def one_list(lst):
+    lst = [v for val in lst for v in val]
+    return lst
+
+# Create a function that takes a list of strings and return a list, sorted from shortest to longest.
+def sort_by_length(lst):
+    lst.sort(key=len)
+    return lst
+
+# Create a function that takes a single character as an argument and returns the char code of its lowercased / uppercased counterpart.
+def counterpartCharCode(char):
+    if char.isalpha() == True and char.isupper():
+        return ord(char.lower())
+    elif char.isalpha() == True and char.islower():
+        return ord(char.upper())
+    elif char.isalpha() == False:
+        return ord(char)
+
+# Write a function that creates a dictionary with each (key, value) pair being the (lower case, upper case) versions of a letter, respectively.
+def mapping(letters):
+    dct = {letters[i]:letters[i].upper() for i in range(len(letters))}
+    print(dct)
+    return dct
+
+# Write a function that takes a credit card number and only displays the last four characters. The rest of the card number must be replaced by ************.
+def card_hide(card):
+    last4 = card[-4:]
+    last4 = last4.rjust(len(card), '*')
+    return last4
+
+# A typical car can hold four passengers and one driver, allowing five people to travel around. Given n number of people, return how many cars are needed to seat everyone comfortably.
+def cars_needed(n):
+    return math.ceil(n/5)
+
+# The insurance guy calls again and apologizes. They found another policy made by your spouse, but this one is limited to cover a particular maximum in losses (for example, 50,000€). You send a bill to your spouse for the difference you lost.
+# Given an dict of the stolen items and a limit, return the difference between the total value of those items and the limit of the policy.
+def calc_diff(obj, limit):
+    return sum(obj.values()) - limit
