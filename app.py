@@ -256,3 +256,62 @@ def cars_needed(n):
 # Given an dict of the stolen items and a limit, return the difference between the total value of those items and the limit of the policy.
 def calc_diff(obj, limit):
     return sum(obj.values()) - limit
+
+# Create a function that takes a number as an argument and returns "Fizz", "Buzz" or "FizzBuzz".
+
+# If the number is a multiple of 3 the output should be "Fizz".
+# If the number given is a multiple of 5, the output should be "Buzz".
+# If the number given is a multiple of both 3 and 5, the output should be "FizzBuzz".
+# If the number is not a multiple of either 3 or 5, the number should be output on its own as shown in the examples below.
+# The output should always be a string even if it is not a multiple of 3 or 5.
+def fizz_buzz(num):
+    if num % 3 == 0 and num % 5 == 0:
+        return 'FizzBuzz'
+    elif num % 3 == 0:
+        return 'Fizz'
+    elif num % 5 == 0:
+        return 'Buzz'
+    else:
+        return '{}'.format(num)
+
+# Write a function that removes any non-letters from a string, returning a well-known film title.
+def letters_only(txt):
+    txt = re.sub("[^a-zA-Z]+", "", txt)
+    return txt
+
+# Imagine a messaging device with only one button. For the letter A, you press the button one time, for E, you press it five times, for G, it's pressed seven times, etc, etc.
+
+# Write a function that takes a string (the message) and returns the total number of times the button is pressed.
+import string
+def how_many_times(msg):
+    num = [string.ascii_lowercase.index(letter) + 1 for letter in msg]
+    return sum(num)
+
+# Write a function that takes a list and a number as arguments. Add the number to the end of the list, then remove the first element of the list. The function should then return the updated list.
+def next_in_line(lst, num):
+    if not lst:
+        return 'No list has been selected'
+    else:
+        lst.append(num)
+        lst.pop(0)
+        return lst
+
+# Create a function that takes a string and returns a string with its letters in alphabetical order.
+def alphabet_soup(txt):
+    return ''.join(sorted(txt))
+
+# Create a function that takes a list of numbers between 1 and 10 (excluding one number) and returns the missing number.
+def missing_num(lst):
+    # lst.append(0)
+    return 55 - sum(lst)
+
+# Write a function that returns the lexicographically first and lexicographically last rearrangements of a string. Output the results in the following manner:
+def first_and_last(s):
+    lst = []
+    first = ''.join(sorted(s))
+    last = ''.join(sorted(s, reverse=True))
+    lst.append(first)
+    lst.append(last)
+    return lst
+
+https://edabit.com/challenge/PbDLFCa4qp5knYN43
