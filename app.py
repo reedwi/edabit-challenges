@@ -1,5 +1,6 @@
 import datetime
 import math
+import operator
 # Create a function that takes a list of numbers lst, a string s and return a list of numbers as per the following rules:
 
 # "Asc" returns a sorted list in ascending order.
@@ -314,4 +315,104 @@ def first_and_last(s):
     lst.append(last)
     return lst
 
-https://edabit.com/challenge/PbDLFCa4qp5knYN43
+# This Triangular Number Sequence is generated from a pattern of dots that form a triangle. The first 5 numbers of the sequence, or dots, are:
+# This means that the first triangle has just one dot, the second one has three dots, the third one has 6 dots and so on.
+
+# Write a function that gives the number of dots with its corresponding triangle number of the sequence.
+def triangle(n):
+    num = n * (n+1)/2
+    return int(num)
+
+# /You are stuck in a multi-storey car parking lot. Your task is to exit the carpark using only the staircases. Exit is always at the bottom right of the ground floor.
+
+# Create a function that takes a two-dimensional list where:
+
+# Free carparking spaces are represented by a 0
+# Staircases are represented by a 1
+# Your starting position is represented by a 2 and can be at any level of the car park.
+# Exit is always at the bottom right of the ground floor.
+# You must use the staircases (1) to go down a level.
+# Each floor will have only one staircase apart from the ground floor which will not have any staircases.
+# ... and returns a list of the quickest route out of the carpark.
+def parking_exit(lst):
+    res = []
+    pos = -1
+    for row in lst:
+        if pos < 0 and 2 in row:
+            pos = row.index(2)
+        if pos > -1 and 1 in row:
+            stair = row.index(1)
+            diff = stair - pos
+            if diff > 0:
+                res.append("R{}".format(diff))
+                res.append("D1")
+                pos = stair
+            elif diff < 0:
+                res.append("L{}".format(-diff))
+                res.append("D1")
+                pos = stair
+            else:
+                res[-1] = "D{}".format(int(res[-1][1]) + 1)
+        elif 1 not in row:
+            ext = len(row) - 1
+            diff = ext - pos
+            if diff > 0:
+                res.append("R{}".format(diff))
+            elif diff < 0:
+                res.append("L{}".format(-diff))
+    return res
+
+
+# Create a function that takes a string and returns True or False, depending on whether the characters are in order or not.
+def is_in_order(txt):
+    sort = sorted(txt)
+    if list(txt) == sort:
+        print(True)
+        return True
+    else:
+        print(False)
+        return False
+
+# I am trying to filter out empty arrays from an array. In other words, I want to transform something that looks like this: 
+# ["a", "b", [], [], [1, 2, 3]] to look like ["a", "b", [1, 2, 3]]. My code looks like this:
+def remove_empty_arrays(arr):
+		return [x for x in arr if x != []]
+
+
+# Create a function that returns the sum of all even elements in a 2D matrix.
+def sum_of_evens(lst):
+    return sum([y for x in lst for y in x if y % 2 == 0])
+
+# Create a function that takes a list and finds the integer which appears an odd number of times.
+def find_odd(lst):
+    for num in lst:
+        if lst.count(num) % 2 != 0:
+            return num
+
+# Create a function that takes two numbers and a mathematical operator + - / * and will perform a calculation with the given numbers.
+def calculator(num1, operator, num2):
+    if operator == '+':
+        return num1 + num2
+    elif operator == '-':
+        return num1 - num2
+    elif operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        if num2 == 0:
+            return "Can't divide by 0!"
+        else:
+            return num1 / num2
+
+# Create a function, that will for a given a, b, c, do the following:
+
+# Add a to itself b times.
+# Check if the result is divisible by c.
+def abcmath(a, b, c):
+    num = a*b
+    print(num)
+    if num % c == 0:
+        return True
+    else:
+        return False
+
+abcmath(69, 15, 9)
