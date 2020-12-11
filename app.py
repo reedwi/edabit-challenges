@@ -415,4 +415,48 @@ def abcmath(a, b, c):
     else:
         return False
 
-abcmath(69, 15, 9)
+# There are two types of graphs; directed and undirected. In an undirected graph, the edges between nodes have no particular 
+# direction (like a two-way street) whereas in a directed graph, each edge has a direction associated with it (like a one-way street).
+# For two nodes in a graph to be considered adjacent to one another, there must be an edge between them. In the example given above, 
+# nodes 0 and 1 are adjacent, but nodes 0 and 2 are not.
+# We can encode graphs using an adjaceny matrix. An adjacency matrix for a graph with "n" nodes is an "n * n" matrix where the entry at 
+# row "i" and column "j" is a 0 if nodes "i" and "j" are not adjacent, and 1 if nodes "i" and "j" are adjacent.
+# https://edabit.com/challenge/3DAkZHv2LZjgqWbvW
+def is_adjacent(matrix, node1, node2):
+    if matrix[node1][node2] == 1:
+        return True
+    else: return False
+
+
+# Create a function that takes damage and speed (attacks per second) and returns the amount of damage after a given time.
+def damage(damage, speed, time):
+    if time == 'second' and damage > 0 and speed > 0:
+        return damage * speed
+    elif time == 'minute' and damage > 0 and speed > 0:
+        return damage * speed * 60
+    elif time == 'hour' and damage > 0 and speed > 0:
+        return damage * speed * 60 * 60
+    else:
+        return 'invalid'
+
+def XO(txt):
+    txt = txt.lower()
+    x_count = txt.count('x')
+    o_count = txt.count('o')
+    if o_count == x_count:
+        return True
+    else:
+        return False
+
+# Create a function that takes a string and returns a string in which each character is repeated once.
+def double_char(txt):
+    return ''.join([l * 2 for l in txt])
+
+# Given a list of numbers, write a function that returns a list that...
+
+# Has all duplicate elements removed.
+# Is sorted from least to greatest value
+def unique_sort(lst):
+    new_lst = list(dict.fromkeys(lst))
+    new_lst.sort()
+    return new_lst
