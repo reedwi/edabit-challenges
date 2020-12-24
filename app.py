@@ -1,6 +1,7 @@
 import datetime
 import math
 import operator
+import numpy as np
 # Create a function that takes a list of numbers lst, a string s and return a list of numbers as per the following rules:
 
 # "Asc" returns a sorted list in ascending order.
@@ -688,3 +689,343 @@ def bonus(days):
 # for all the tiles in their hand. Each hand contains 7 scrabble tiles.
 def maximum_score(tile_hand):
     return sum([x['score'] for x in tile_hand])
+
+# Given a list of numbers, create a function which returns the list but with each element's index in the list added to itself. 
+# This means you add 0 to the number at index 0, add 1 to the number at index 1, etc...
+def add_indexes(lst):
+    return [lst[i] + i for i, n in enumerate(lst)]
+
+# A number n is automorphic if n^2 ends in n.
+
+# For example: n=5, n^2=25
+
+# Create a function that takes a number and returns True if the number is automorphic, False if it isn't.
+def is_automorphic(n):
+    n2 = n ** 2
+    l = len(str(n))
+    if n == 0:
+        return True
+    print(str(range(n2)[-1] + 1)[-l:] == str(n) )
+    return str(range(n2)[-1] + 1)[-l:] == str(n) 
+
+    return str(n**2).endswith(str(n))
+
+# Create a function that calculates the missing value of 3 inputs using Ohm's law. The inputs are v, r or i (aka: voltage, resistance and current).
+
+# Ohm's law: V = R * I
+
+def ohms_law(v, r, i):
+    if sum(x is None for x in [v, r, i]) != 1:
+        return 'Invalid'
+    else:
+        if v is None:
+            return round(r*i, 2)
+        elif r is None:
+            return round(v/i, 2)
+        elif i is None:
+            return round(v/r, 2)
+
+# Given an unsorted list, create a function that returns the nth smallest element (the smallest element is the first smallest, the second smallest element is the second smallest, etc).
+# def nth_smallest(lst, n):
+# 	if len(lst) < n:
+#         return
+#     else:
+#         lst.sort()
+#         return lst[n-1]
+
+# An isogram is a word that has no duplicate letters. Create a function that takes a string and returns either True or False depending on whether or not it's an "isogram".
+def is_isogram(txt):
+    txt = txt.lower()
+    return sum([txt.count(i) for i in txt]) == len(txt)
+    return len(txt) == len(set(txt.lower()))
+
+# A group of friends have decided to start a secret society. The name will be the first letter of each of their names, sorted in alphabetical order.
+
+# Create a function that takes in a list of names and returns the name of the secret society.
+def society_name(friends):
+    return ''.join(sorted(name[0] for name in friends))
+
+# With Python 3, you can assign variables from lists in a much more succinct way. Create variables first, middle and last from the given list using destructuring 
+# assignment (check the Resources tab for some examples), where:
+first, *middle, last = [1, 2, 3, 4, 5, 6]
+
+# Create a function that takes an integer and returns a list from 1 to the given number, where:
+
+# If the number can be divided evenly by 4, amplify it by 10 (i.e. return 10 times the number).
+# If the number cannot be divided evenly by 4, simply return the number.
+def amplify(num):
+    return [n*10 if n % 4 == 0 else n for n in range(1, num+1)]
+
+# Your task is to create a Circle constructor that creates a circle with a radius provided by an argument. The circles constructed must have two getters getArea() (PIr^2) 
+# and getPerimeter() (2PI*r) which give both respective areas and perimeter (circumference).
+
+# For help with this class, I have provided you with a Rectangle constructor which you can use as a base example.
+class Rectangle:
+
+	def __init__(self, sideA=0, sideB=0):
+		self.sideA = sideA
+		self.sideB = sideB
+
+	def getArea(self):
+		return self.sideA * self.sideB
+  
+	def getPerimeter(self):
+		return 2 * (self.sideA + self.sideB)
+
+class Circle:
+
+    def __init__(self, radius=0):
+        self.radius = radius
+
+    def getPerimeter(self):
+        return self.radius * 2 * math.pi
+
+    def getArea(self):
+        return self.radius ** 2 * math.pi
+
+# Create a function, that will for a given a, b, c, do the following:
+
+# Add a to itself b times.
+# Check if the result is divisible by c.
+def abcmath(a, b, c):
+    i = 0
+    while i <= range(b)[-1]:
+        a += a
+        i += 1
+    else:
+        return a % c == 0
+
+    return a*(2**b) % c == 0
+    # return (a * b) % c == 0
+
+# Write a function that removes all capitals letters from a sentence except the first letter, put quotation marks around the sentence and add ", whispered Edabit." at the end.
+def shhh(txt):
+    if txt: return '"{}{}", '.format(txt[0].upper(), txt[1:].lower()) + 'whispered Edabit.'
+    else: return '"", whispered Edabit.'
+
+# Create a function that takes a list of numbers and return the number that's unique.
+
+def unique(lst):
+    return list(filter(lambda x: lst.count(x) == 1, lst))[0]
+
+# Given a number, return a list containing the two halves of the number. If the number is odd, make the rightmost number higher.
+def number_split(n):
+    return [math.floor(n/2), math.ceil(n/2)]
+
+# Create a function that returns the mean of all digits.
+def mean(num):
+    dig_list = list(map(int, str(num)))
+    mean = sum(dig_list)/len(dig_list)
+    return int(mean)
+
+# Create a function that takes a list of strings and integers, and filters out the list so that it returns a list of integers only.
+def filter_list(l):
+    return [x for x in l if isinstance(x, int)]
+
+# Create a function that replaces all the vowels in a string with a specified character.
+def replace_vowels(txt, ch):
+    return re.sub('[aeiou]', ch, txt)
+
+# Create a function that will return an integer number containing the amount of digits in the given integer num.
+def num_of_digits(num):
+    return len(str(abs(num)))
+
+def total_volume(*boxes):
+    return sum([math.prod(x) for x in boxes])
+
+# I'm trying to watch some lectures to study for my next exam but I keep getting distracted by meme compilations, vine compilations, anime, and more on my favorite video platform.
+
+# Your job is to help me create a function that takes a string and checks to see if it contains the following words or phrases:
+
+# "anime"
+# "meme"
+# "vines"
+# "roasts"
+# "Danny DeVito"
+# If it does, return "NO!". Otherwise, return "Safe watching!".
+# I'm trying to watch some lectures to study for my next exam but I keep getting distracted by meme compilations, vine compilations, anime, and more on my favorite video platform.
+
+# Your job is to help me create a function that takes a string and checks to see if it contains the following words or phrases:
+
+# "anime"
+# "meme"
+# "vines"
+# "roasts"
+# "Danny DeVito"
+# If it does, return "NO!". Otherwise, return "Safe watching!".
+def prevent_distractions(txt):
+    nope = ('anime', 'meme', 'vine', 'roasts', 'Danny DeVito')
+    return 'NO!' if any(i in txt for i in nope) else 'Safe watching!'
+
+# Write a function that takes a string as an argument and returns the left most integer in the string.
+def left_digit(num):
+    return int(re.search('[0-9]', num).group(0))
+   
+# Create a function that takes three arguments a, b, c and returns the sum of the numbers that are evenly divided by c from the range a, b inclusive.
+def evenly_divisible(a, b, c):
+    return sum([x for x in range(a,b+1) if x % c == 0])
+
+# The "Reverser" takes a string as input and returns that string in reverse order, with the opposite case.
+def reverse(txt):
+    return ''.join([x.lower() if x.isupper() else x.upper() for x in txt[::-1]])
+    return txt[::-1].swapcase()
+
+# Mary wants to run a 25-mile marathon. When she attempts to sign up for the marathon, she notices the sign-up sheet doesn't directly state the marathon's length. 
+# Instead, the marathon's length is listed in small, different portions. Help Mary find out how long the marathon actually is.
+
+# Return True if the marathon is 25 miles long, otherwise, return False.
+def marathon_distance(d):
+    return sum([abs(x) for x in d]) == 25
+
+# Create a function that takes in a current mood and return a sentence in the following format: "Today, I am feeling {mood}". 
+# However, if no argument is passed, return "Today, I am feeling neutral".
+def mood_today(mood='neutral'):
+    if mood: return 'Today, I am feeling {}'.format(mood)
+    else: return 'Today, I am feeling neutral'
+
+# Create a function that takes three parameters where:
+
+# x is the start of the range (inclusive).
+# y is the end of the range (inclusive).
+# n is the divisor to be checked against.
+# Return an ordered list with numbers in the range that are divisible by the third parameter n. Return an empty list if there are no numbers that are divisible by n.
+def list_operation(x, y, n):
+    return [z for z in range(x, y+1) if z % n == 0]
+
+# Write a function that returns the number of users in a chatroom based on the following rules:
+
+# If there is no one, return "no one online".
+# If there is 1 person, return "user1 online".
+# If there are 2 people, return user1 and user2 online".
+# If there are n>2 people, return the first two names and add "and n-2 more online".
+# For example, if there are 5 users, return:
+def chatroom_status(users):
+    if not users:
+        return 'no one online'
+    elif len(users) == 1:
+        return '{} online'.format(users[0])
+    elif len(users) == 2:
+        return '{} and {} online'.format(users[0], users[1])
+    elif len(users) > 2:
+        return '{}, {} and {} more online'.format(users[0], users[1], len(users)-2)
+
+# Create a function that determines whether each seat can "see" the front-stage. A number can "see" the front-stage if it is strictly greater than the number before it.
+
+# Everyone can see the front-stage in the example below:
+# FRONT STAGE
+# [[1, 2, 3, 2, 1, 1],
+# [2, 4, 4, 3, 2, 2],
+# [5, 5, 5, 5, 4, 4],
+# [6, 6, 7, 6, 5, 5]]
+
+# Starting from the left, the 6 > 5 > 2 > 1, so all numbers can see.
+# 6 > 5 > 4 > 2 - so all numbers can see, etc.
+def can_see_stage(seats):
+    # print(list(map(list, zip(*seats))))
+    # transposed_list = np.array(seats).T.tolist()
+    # t_f = [True if val == sorted(val) and val == list(set(val)) else False for val in transposed_list]
+    # print(t_f)
+    # print(sum(t_f))
+    # print(len(t_f))
+    # if sum(t_f) == len(t_f):
+    #     return True
+    # else: return False
+	seats = np.array(seats)
+	return np.all(seats[1:] - seats[:-1] > 0)
+
+
+	return all(sorted(set(row)) == list(row) for row in zip(*seats))
+
+
+# Given two integers a and b, return how many times a can be halved while still being greater than b.
+def halve_count(a, b):
+	i=0
+	while a>b:
+		a = a/2
+		i+=1
+	return i-1
+
+# Suppose that you invest $10,000 for 10 years at an interest rate of 6% compounded monthly. What will be the value of your investment at the end of the 10 year period?
+
+# Create a function that accepts the principal p, the term in years t, the interest rate r, and the number of compounding periods per year n. The function returns
+#  the value at the end of term rounded to the nearest cent.
+
+# For the example above:
+
+# compound_interest(10000, 10, 0.06, 12) ➞ 18193.97
+# Note that the interest rate is given as a decimal and n=12 because with monthly compounding there are 12 periods per year. Compounding can also be done annually, quarterly, weekly, or daily.
+def compound_interest(p, t, r, n):
+    return round(p * (1 + (r/n))**(n*t), 2)
+
+# Create a class Employee that will take a full name as argument, as well as a set of none, one or more keywords. Each instance 
+# should have a name and a lastname attributes plus one more attribute for each of the keywords, if any.
+# class Employee(name):
+#     def __init__(self, name, lastname, salary=int(), height=int(), nationality='', subordinates=[]):
+#         self.name = name
+#         self.lastname = lastname
+#         self.salary = salary
+#         self.height = height
+#         self.nationality = nationality
+#         self.subordinates = subordinates
+
+#     name = Employee(name.name, name.lastname)
+#     print(name)
+
+# In this challenge, you have to convert a weight weighed on a planet of the Solar System to the corresponding weight on another planet.
+
+# To convert the weight, you have to divide it by the gravitational force of the planet on which is weighed and multiply the result (the mass) for the gravitational force of the other planet. See the table below for a list of gravitational forces:
+
+# weight on planet_a / gravitational force of planet_a * gravitational force of planet_b
+def space_weights(planet_a, weight, planet_b):
+    weightdict = {
+        'Mercury'	: 3.7,
+        'Venus' : 8.87,
+        'Earth' : 9.81,
+        'Mars' : 3.711,
+        'Jupiter' : 24.79,
+        'Saturn' : 10.44,
+        'Uranus' : 8.69,
+        'Neptune' : 11.15
+    }
+    return round(weight/weightdict[planet_a] * weightdict[planet_b], 2)
+
+# Create a function which returns a list of booleans, from a given number. Iterating through the number one digit at a time, append True if the digit is 1 and False if it is 0.
+def integer_boolean(n):
+    return [int(x) == 1 for x in n]
+
+# Create a function that returns True if an asterisk * is inside a box.
+def in_box(lst):
+    another_lst = []
+    for val in lst:
+        val = ''.join(val.split())
+        val = val.strip('*')
+        print(list(val))
+        srt = sorted(val)
+        if '*' in val and list(val) != srt:
+            another_lst.append(1)
+    if len(another_lst) > 0:
+        print(len(another_lst))
+        return True
+    else: return False
+
+
+# Write a function that returns True if the binary string can be rearranged to form a string of alternating 0s and 1s.
+def can_alternate(s):
+    if s.count('0') == s.count('1') or s.count('0') - s.count('1') == 1 or s.count('0') - s.count('1') == -1:
+        return True
+    else: return False
+
+
+# Create a function that takes a list of numbers or strings and returns a list with the items from 
+# the original list stored into sublists. Items of the same value should be in the same sublist.
+def advanced_sort(lst):
+    result = {}
+    for x in lst:
+        if not result.get(x):
+            result[x] = [x]
+        else:
+            result[x].append(x)
+
+    dic_lst = list(result.values())
+    return sorted(dic_lst, key= lambda x: lst.index(x[0]))
+        
