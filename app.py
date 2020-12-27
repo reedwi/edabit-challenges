@@ -1029,3 +1029,57 @@ def advanced_sort(lst):
     dic_lst = list(result.values())
     return sorted(dic_lst, key= lambda x: lst.index(x[0]))
         
+# The Atbash cipher is an encryption method in which each letter of a word is replaced with its "mirror" letter in 
+# the alphabet: A <=> Z; B <=> Y; C <=> X; etc.
+
+# Create a function that takes a string and applies the Atbash cipher to it.
+def atbash(txt):
+    letters = {'a':'z', 'b':'y', 'c':'x', 'd':'w', 'e':'v', 'f':'u', 'g':'t', 'h':'s', 'i':'r', 'j':'q', 'k':'p', 'l':'o', 'm':'n',
+                'z':'a', 'y':'b', 'x':'c', 'w':'d', 'v':'e', 'u':'f', 't':'g', 's':'h', 'r':'i', 'q':'j', 'p':'k', 'o':'l', 'n':'m'}
+    lst = []
+    for letter in list(txt):
+        if letter.isalpha():
+            if letter.isupper():
+                l = (letters.get(letter.lower())).upper()
+                # lst.append(l)
+            else:
+                l = letters.get(letter)
+        else:
+            l = letter
+        lst.append(l)
+        
+    return ''.join(lst)
+
+    return txt.translate(str.maketrans(alpha, alpha[::-1].swapcase()))
+
+# You're in the midst of creating a typing game.
+
+# Create a function that takes in two lists: the list of user-typed words, and the list of correctly-typed words and 
+# outputs a list containing 1s (correctly-typed words) and -1s (incorrectly-typed words).
+def correct_stream(user, correct):
+    return [1 if user[i] == correct[i] else -1 for i, x in enumerate(user)]
+
+# Imagine a circle and two squares: a smaller and a bigger one. For the smaller one, the circle is a circumcircle and 
+# for the bigger one, an incircle.
+# Create a function, that takes an integer (radius of the circle) and returns the difference of the areas of the two squares.
+def square_areas_difference(r):
+    print(2*r*r)
+    return (4*r*r)-(2*r*r)
+
+# Your computer might have been infected by a virus! Create a function that finds the viruses in files and removes them from your computer.
+def remove_virus(files):
+	items = files.split(': ')[1].split(', ')
+	valid = [item for item in items if \
+						not re.match(r'^(?!anti)(?!not).*virus\.\w+',item) and 
+						not re.match(r'.*malware\.\w+',item)]
+	return "PC Files: " + (', '.join(valid) if valid else 'Empty')
+
+# A quadratic equation a x² + b x + c = 0 has either 0, 1, or 2 distinct solutions for real values of x. Given a, b and c, 
+# you should return the number of solutions to the equation.
+def solutions(a, b, c):
+    if (b**2) - (4*a*c) > 0:
+        return 2
+    elif (b**2) - (4*a*c) == 0:
+        return 1
+    elif b**2 - 4*a*c < 0:
+        return 0
