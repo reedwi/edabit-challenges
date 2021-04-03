@@ -2,6 +2,7 @@ import datetime
 import math
 import operator
 import numpy as np
+import itertools
 # Create a function that takes a list of numbers lst, a string s and return a list of numbers as per the following rules:
 
 # "Asc" returns a sorted list in ascending order.
@@ -1083,3 +1084,322 @@ def solutions(a, b, c):
         return 1
     elif b**2 - 4*a*c < 0:
         return 0
+
+# Create a class that imitates a select screen. For simplicity, the cursor can only move right!
+
+# In the display method, return a string representation of the list, but with square brackets around the currently selected element. Also, create the method to_the_right, 
+# which moves the cursor one element to the right.
+
+# The cursor should start at index 0.
+# class Menu:
+# 	# add an __init__ method
+#     def __init__(self, lst):
+#         self.lst = lst
+#         self.pos = 0
+#         self.len_lst = len(lst)
+	
+# 	def to_the_right(self):
+# 		# write code here!
+#         self.pos = (self.pos+1) % self.len_lst
+		
+# 	def display(self):
+# 		# write code here
+#         tmp_lst = self.lst.copy()
+#         tmp_lst[self.pos] = [tmp_lst[self.pos]]
+#         return str(tmp_lst)
+
+# Jay and Silent Bob have been given a fraction of an ounce but they only understand grams. Convert a fraction passed as a string to 
+# grams with up to two decimal places. An ounce weighs 28 grams. 
+# 
+def jay_and_bob(txt):
+    grams = {
+        'half'	: '14 grams',
+        'quarter' : '7 grams',
+        'eighth' : '3.5 grams',
+        'sixteenth' : '1.75 grams'
+    }
+    return grams.get(txt)
+
+# Create a function that takes a number num and returns its length.  
+# The use of the len() function is prohibited. 
+def number_length(num):
+    return sum(1 for x in str(num))
+
+# A city skyline can be represented as a 2-D list with 1s representing buildings. In the example below, the height of the tallest building is 4 (second-most right column).
+
+# [[0, 0, 0, 0, 0, 0],
+# [0, 0, 0, 0, 1, 0],
+# [0, 0, 1, 0, 1, 0],
+# [0, 1, 1, 1, 1, 0],
+# [1, 1, 1, 1, 1, 1]]
+# Create a function that takes a skyline (2-D list of 0's and 1's) and returns the height of the tallest skyscraper.
+
+def tallest_skyscraper(lst):
+    lstup = list(map(list, zip(*lst)))
+    lenlst = sum(1 in x for x in lst)
+    return lenlst
+
+    print(lenlst)
+
+# You work for a manufacturer, and have been asked to calculate the total profit made on the sales of a product. 
+# You are given a dictionary containing the cost price per unit (in dollars), sell price per unit (in dollars), and the starting inventory. 
+# Return the total profit made, rounded to the nearest dollar.
+# profit({
+#   "cost_price": 32.67,
+#   "sell_price": 45.00,
+#   "inventory": 1200
+# }) ➞ 14796
+
+# profit({
+#   "cost_price": 225.89,
+#   "sell_price": 550.00,
+#   "inventory": 100
+# }) ➞ 32411
+
+# profit({
+#   "cost_price": 2.77,
+#   "sell_price": 7.95,
+#   "inventory": 8500
+# }) ➞ 44030
+# Notes
+# Assume all inventory has been sold.
+# Profit = Total Sales - Total Cost
+
+def profit(info):
+    return (round(info['sell_price']*info['inventory']-info['cost_price']*info['inventory']))
+
+# Someone has attempted to censor my strings by replacing every vowel with a *, l*k* th*s. Luckily, I've been able to find the vowels that were removed.
+
+# Given a censored string and a string of the censored vowels, return the original uncensored string.
+
+def uncensor(txt, vowels): 
+    vwls = (x for x in vowels)
+    return ''.join([next(vwls) if x == '*' else x for x in txt])
+
+class player():
+    def __init__(self, name, age, height, weight):
+        self.name = name   
+        self.age = age
+        self.height = height
+        self.weight = weight
+		
+    def get_age(self):
+        return '{} is age {}'.format(self.name, self.age)
+		
+    def get_height(self):	
+        return '{} is {}cm'.format(self.name, self.height)
+	
+    def get_weight(self):
+        return '{} weighs {}kg'.format(self.name, self.weight)
+
+
+# Create a class Employee that will take a full name as argument, as well as a set of none, one or more keywords. Each instance should have a name and a lastname 
+# attributes plus one more attribute for each of the keywords, if any.
+# First and last names will be separated by a whitespace. The test will not include any middle names or initials.
+# The value of the keywords can be an int, a str or a list.
+class Employee():
+    def __init__(self, name, **kwargs):
+        self.name = name.split()[0]
+        self.lastname = name.split()[1]
+        self.__dict__.update(kwargs)
+    
+def shift_to_right(x, y):
+    return (x//2**y)
+
+# Create a function that converts a date formatted as MM/DD/YYYY to YYYYDDMM.
+def format_date(date):
+    return ''.join(date.split('/')[2]+date.split('/')[1]+date.split('/')[0])
+
+# Create a function that takes a list of pyramid numbers and returns the maximum sum of consecutive numbers from the top to the bottom of the pyramid.
+                    #     /3/
+                    #     \7\ 4 
+                    #    2 \4\ 6 
+                    #   8 5 \9\ 3
+
+# Longest slide down sum is 3 + 7 + 4 + 9 = 23
+
+def longest_slide(pyramid):
+    l = len(pyramid)
+    for i in range(l-2,-1,-1):
+        for j in range(i+1):
+            pyramid[i][j] = max([pyramid[i+1][j],pyramid[i+1][j+1]])+pyramid[i][j]
+    return pyramid[0][0]
+
+
+# longest_slide([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]])\
+
+# Create methods for the Calculator class that can do the following:
+
+# Add two numbers.
+# Subtract two numbers.
+# Multiply two numbers.
+# Divide two numbers.
+
+class calculator:
+    def add(self, x, y):
+        return x + y
+    def subtract(self, x,y):
+        return x - y
+    def multiply(self, x,y):
+        return x * y
+    def divide(self, x,y):
+        return x / y
+
+# Splitting Up Numbers
+# Create a function that takes a number num and returns each place value in the number.
+
+# Examples
+# num_split(39) ➞ [30, 9]
+
+# num_split(-434) ➞ [-400, -30, -4]
+
+# num_split(100) ➞ [100, 0, 0]
+def num_split(num):
+    l = len(str(abs(num)))
+    print(l)
+    vals = [int(val.ljust(l-i, '0')) if num > 0 else int((val).ljust(l-i, '0'))*-1 for i, val in enumerate(str(abs(num)))]
+    print(vals)
+    return vals
+
+# Write a function that returns the length of the shortest contiguous sublist whose sum of all elements strictly exceeds n.
+
+# Examples
+# min_length([5, 8, 2, -1, 3, 4], 9) ➞ 2
+
+# min_length([3, -1, 4, -2, -7, 2], 4) ➞ 3
+# # Shortest sublist whose sum exceeds 4 is: [3, -1, 4]
+
+# min_length([1, 0, 0, 0, 1], 1) ➞ 5
+
+# min_length([0, 1, 1, 0], 2) ➞ -1
+def min_length(lst, n):
+    subs = [lst[i:i+j] for i in range(0,len(lst)) for j in range(1,len(lst)-i+1)]
+    print(subs)
+
+    sums = [x for x in subs if sum(x) > n] 
+    print(sums)
+    if len(sums) > 0:
+        sums.sort(key=len)
+        return len(sums[0])
+    else:
+        return -1
+
+# Create a function that takes two numbers as arguments (num, length) and returns a list of multiples of num until the list length reaches length.
+# list_of_multiples(7, 5) ➞ [7, 14, 21, 28, 35]
+
+# list_of_multiples(12, 10) ➞ [12, 24, 36, 48, 60, 72, 84, 96, 108, 120]
+
+# list_of_multiples(17, 6) ➞ [17, 34, 51, 68, 85, 102]
+def list_of_multiples (num, length):
+    i = 1
+    lst = []
+    while 0 < i <= length:
+        print(i)
+        lst.append(num*i)
+        i += 1
+    return lst
+
+
+# A local news station needs your help to generate the scrolling text for the headlines!
+
+# Create a function that returns a list of strings, where each string contains a single frame of what the scrolling text will look like.
+
+# Text will scroll from right to left.
+# The screen will have a width of n characters.
+# Start and stop when no letters appear on the screen.
+# The example below will demonstrate the output when the screen width is 10.
+def news_at_ten(txt, n):
+    txt, size = " "*n + txt + " "*n, len(txt) + n
+    lst = [txt[i:i+n] for i in range(size+1)]
+    print(txt[3:13])
+    print(lst)
+# news_at_ten('edabit', 10)
+
+# Create a function that returns the simplified version of a fraction.
+
+# Examples
+# simplify("4/6") ➞ "2/3"
+
+# simplify("10/11") ➞ "10/11"
+
+# simplify("100/400") ➞ "1/4"
+
+# simplify("8/4") ➞ "2"
+from fractions import Fraction as frac
+def simplify(txt):
+    return str(frac(txt))
+
+# In this challenge, sort a list containing a series of dates given as strings. Each date is given in the format DD-MM-YYYY_HH:MM:
+# Given a list lst and a string mode, implement a function that returns:
+
+# if mode is equal to "ASC", the list lst sorted in ascending order.
+# if mode is equal to "DSC", the list lst sorted in descending order.
+import datetime
+def sort_dates(lst, mode):
+    dates = [datetime.datetime.strptime(x, '%d-%m-%Y_%H:%M') for x in lst]
+
+    if mode == 'ASC':
+        dates.sort()
+        return [datetime.datetime.strftime(x, '%d-%m-%Y_%H:%M') for x in dates]
+    else:
+        dates.sort(reverse=True)
+        return [datetime.datetime.strftime(x, '%d-%m-%Y_%H:%M') for x in dates]
+
+# sort_dates(["10-02-2018_12:30", "10-02-2016_12:30", "10-02-2018_12:15"], "ASC")
+
+# Write a function that selects all words that have all the same vowels (in any order and/or number) as the first word, including the first word.
+
+# Examples
+# same_vowel_group(["toe", "ocelot", "maniac"]) ➞ ["toe", "ocelot"]
+
+# same_vowel_group(["many", "carriage", "emit", "apricot", "animal"]) ➞ ["many"]
+
+# same_vowel_group(["hoops", "chuff", "bot", "bottom"]) ➞ ["hoops", "bot", "bottom"]
+
+def same_vowel_group(w):
+	first = set(w[0]) & set('aeiou')
+	return [i for i in w if set(i) & set('aeiou') == first]
+
+# Create a function that returns how many times it's been called previously. Do not use a global variable.
+def counter(k=[-1]):
+	k[0] += 1
+	return k[0]
+
+# Create a function that takes a country's name and its area as arguments and returns the area of the country's proportion of the total world's landmass.
+# The total world's landmass is 148,940,000 [Km^2]
+# Round the result to two decimal places.
+def area_of_country(name, area):
+    return f'{name} is {round(area/148940000 * 100, 2)}% of the total world\'s landmass'
+
+# Create a Pizza class with the attributes order_number and ingredients (which is given as a list). Only the ingredients will be given as input.
+
+# You should also make it so that its possible to choose a ready made pizza flavour rather than typing out the ingredients manually! As well as 
+# creating this Pizza class, hard-code the following pizza flavours.
+class Pizza:
+	__orders = 0
+	def __init__(self, ingredients):
+		self.order_number = self.OrderNumber()
+		self.ingredients = ingredients
+	@staticmethod
+	def OrderNumber():
+		Pizza.__orders += 1
+		return Pizza.__orders
+	@classmethod
+	def hawaiian(cls):
+		return cls(['ham', 'pineapple'])
+	@classmethod
+	def meat_festival(cls):
+		return cls(['beef', 'meatball', 'bacon'])
+	@classmethod
+	def garden_feast(cls):
+		return cls(['spinach', 'olives', 'mushroom'])
+
+# In cricket, an over consists of six deliveries a bowler bowls from one end. Create a function that takes the number of balls balls bowled by a 
+# bowler and calculates the number of overs and balls bowled by him/her. Return the value as a float, in the format overs.balls.
+def total_overs(balls):
+    print(balls // 6)
+    if balls % 6 == 0:
+        return balls / 6
+    else:
+        return float('{}.{}'.format(balls//6, balls % 6))
+
