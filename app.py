@@ -3,6 +3,8 @@ import math
 import operator
 import numpy as np
 import itertools
+import socket
+import calendar
 # Create a function that takes a list of numbers lst, a string s and return a list of numbers as per the following rules:
 
 # "Asc" returns a sorted list in ascending order.
@@ -1402,4 +1404,85 @@ def total_overs(balls):
         return balls / 6
     else:
         return float('{}.{}'.format(balls//6, balls % 6))
+
+# Write a function that returns True if two arrays, when combined, form a consecutive sequence. A consecutive sequence is a sequence without any gaps in the integers,
+#  e.g. 1, 2, 3, 4, 5 is a consecutive sequence, but 1, 2, 4, 5 is not.
+def consecutive_combo(lst1, lst2):
+    return sorted(lst1+lst2) == list(range(sorted(lst1+lst2)[0], sorted(lst1+lst2)[-1]+1))
+
+# Write a function that takes the coordinates of three points in the form of a 2d array and returns the perimeter of the triangle. 
+# The given points are the vertices of a triangle on a two-dimensional plane.
+def perimeter(lst):
+	A, B, C = lst
+	d = lambda p, q: ((q[0]-p[0])**2 + (q[1]-p[1])**2)**0.5
+	return round(d(A, B) + d(B, C) + d(A, C), 2)
+
+# Write a regular expression that will help us count how many bad cookies are produced every day. You must use RegEx negative lookbehind.
+import re
+
+pattern = "bad(?<!cookie)"
+
+# The given list represents a season of games. Each list item indicates a player's [hits, official at bats] per game. Return a string with the 
+# player's seasonal batting average rounded to the nearest thousandth.
+def batting_avg(lst):
+    pair = list(map(sum, zip(*lst)))
+    return '{:.3f}'.format((round(pair[0]/pair[1], 3))).lstrip('0')
+    
+# You are given three inputs: a string, one letter, and a second letter.
+
+# Write a function that returns True if every instance of the first letter occurs before every instance of the second letter.
+def first_before_second(s, first, second):
+    f = [m.start() for m in re.finditer(first, s)]
+    s = [m.start() for m in re.finditer(second, s) ]
+    print(f[-1])
+    return all(i > f[-1] for i in s)
+    print(s)
+    # for num in s:
+
+# Write a function that takes an IP address and returns the domain name using PTR DNS records.
+def get_domain(ip_address):
+    return socket.gethostbyaddr(ip_address)[0]
+
+# Given a list of words in the singular form, return a set of those words in the plural form if they appear more than once in the list.
+def pluralize(lst):
+    return {m + 's' if lst.count(m) > 1 else m for m in lst }
+
+# Create a function that takes a string txt and censors any word from a given list lst. The text removed must be replaced by the given character char.
+def censor_string(txt, lst, char):
+    for val in lst:
+        pad = char * len(val)
+        txt = txt.replace(val, pad)
+    return txt
+
+# Create a function that will take a HEX number and returns the binary equivalent (as a string).
+def to_binary(num):
+	return bin(int(num))[2:]
+
+# Write a method that when passed a date as "dd mm yyyy" and returns the date's weekday name in the Dutch culture.
+def weekday_dutch(date):
+    dutch = {
+        'Monday': 'maandag',
+        'Tuesday': 'dinsdag',
+        'Wednesday': 'woensdag',
+        'Thursday': 'donderdag',
+        'Friday':'vrijdag',
+        'Saturday':'zaterdag',
+        'Sunday':'zondag'
+    }
+    d = datetime.datetime.strptime(date, '%d %m %Y').weekday()
+    return dutch[calendar.day_name[d]]
+
+# Given a dictionary containing quarterly sales values for a year, return a string representing a bar chart of the sales by quarter.
+
+# Quarter names (Q1, Q2, Q3, Q4) should appear on the left.
+# Quarters should be sorted in descending order by value.
+# Quarters with the same value should be shown in their yearly order (Q1 -> Q4).
+# Bars should begin with a "|".
+# Repeat the character "#" to fill the bar, with each character having a value of 50.
+# A single space comes after the bar, then the sales for that quarter.
+# If the value is 0, there should be no space after "|".
+# Use the newline character ("\n") to separate each bar in the chart.
+def bar_chart(results):
+    keys = list(results.keys())
+    return f"{keys[0]}|{int((results[keys[0]]/50))*'#'} {int((results[keys[0]]))}\n{keys[1]}|{int((results[keys[1]]/50))*'#'} {int((results[keys[1]]))}\n{keys[2]}|{int((results[keys[2]]/50))*'#'} {int((results[keys[2]]))}\n{keys[3]}|{int((results[keys[3]]/50))*'#'} {int((results[keys[3]]))}"
 
