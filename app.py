@@ -1486,3 +1486,44 @@ def bar_chart(results):
     keys = list(results.keys())
     return f"{keys[0]}|{int((results[keys[0]]/50))*'#'} {int((results[keys[0]]))}\n{keys[1]}|{int((results[keys[1]]/50))*'#'} {int((results[keys[1]]))}\n{keys[2]}|{int((results[keys[2]]/50))*'#'} {int((results[keys[2]]))}\n{keys[3]}|{int((results[keys[3]]/50))*'#'} {int((results[keys[3]]))}"
 
+# pop([0, 0, 0, 0, 4, 0, 0, 0, 0]) ➞ [0, 1, 2, 3, 4, 3, 2, 1, 0]
+# pop([0, 0, 0, 3, 0, 0, 0]) ➞ [0, 1, 2, 3, 2, 1, 0]
+# pop([0, 0, 2, 0, 0]) ➞ [0, 1, 2, 1, 0]
+# pop([0]) ➞ [0]
+def pop(state):
+    if len(set(state)) == 1:
+        return state
+    else:
+        lst = []
+        for i, val in enumerate(state):
+            if i < len(state)/2:
+                lst.append(i)
+            else:
+                lst.append(lst[i-1] - 1)
+        return lst
+
+# There are many different styles of music and many albums exhibit multiple styles. Create a function that takes a list of musical styles from albums and returns how many styles are unique.
+def unique_styles(albums):
+    s = {v for val in albums for v in val.split(',')}
+    return len(s)
+
+# Given a list of integers, return the smallest positive integer not present in the list.
+# Here is a representative example. Consider the list:
+def min_miss_pos(lst):
+    new = sorted(set(filter(lambda x : x > 0, lst)))
+    if new:
+        if new[0] != 1:
+            return 1
+        for i, val in enumerate(new):
+            if new[i] == i + 1:
+                print(val)
+                continue
+            else:
+                print(val)
+                return new[i-1] + 1
+        return new[-1] + 1
+    else:
+        return 1
+
+def vowel_links(txt):
+    print([t for i, t in enumerate(txt.split(' ')) if i > 0 and t[i+1][0]])
